@@ -2,7 +2,7 @@
 
 var spawn = require('child_process').spawn;
 
-exports.rtmp = function() {
+module.exports = function() {
   var child = null;
   /**
    * Download a rtmp video.
@@ -58,12 +58,6 @@ exports.rtmp = function() {
       }
     });
 
-    function stop() {
-      if (child) {
-        child.kill();
-      }
-    }
-
     /**
      * Extracts the information out of a rtmp dump line.
      * @param  {string} data One Line of rtmp dump output.
@@ -91,6 +85,12 @@ exports.rtmp = function() {
       return info;
     }
 
+  }
+
+  var stop = function() {
+    if (child) {
+      child.kill();
+    }
   }
 
   return {
